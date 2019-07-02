@@ -1,0 +1,48 @@
+
+conky.config = {
+    alignment = 'bottom_right',
+    background = false,
+    border_width = 1,
+    default_color = 'FFFFFF',
+    double_buffer = true,
+    draw_borders = false,
+    draw_graph_borders = true,
+    show_graph_scale = true,
+    draw_outline = false,
+    draw_shades = false,
+    gap_x = 30,
+    gap_y = 10,
+    max_user_text = 10000,
+    minimum_width = 300,
+    maximum_width = 300,
+    net_avg_samples = 2,
+    no_buffers = true,
+    override_utf8_locale = true,
+    own_window = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 255,
+    own_window_colour = '000000',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_transparent = true,
+    own_window_type = 'normal',
+    pad_percents = 2,
+    short_units = true,
+    stippled_borders = 3,  
+    text_buffer_size = 8000,
+    total_run_times = 0,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'right',
+    use_xft = true,
+    xftalpha = 1
+};
+
+conky.text = [[
+${font Segoe WP Light:pixelsize=16}MUSIC  ${font}${hr}${font Segoe WP Light:pixelsize=14}${color cccccc}
+${if_running audacious}
+${exec audtool --current-song | awk -F " - " '{print $1}' | sed "s/^ //" }
+${exec audtool --current-song-length}${font}    ${execbar expr 100 \* $(audtool --current-song-output-length-seconds) \/ $(audtool --current-song-length-seconds)}
+${else}
+Nothing in the playlist
+${endif}${font}
+]];

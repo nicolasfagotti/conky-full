@@ -1,0 +1,53 @@
+#!/usr/bin/conky -d -c
+
+alignment bottom_middle
+background no
+border_width 5
+default_color FFFFFF
+double_buffer yes
+draw_borders no
+draw_graph_borders no
+draw_outline no
+draw_shades no
+gap_x 40
+gap_y 40
+max_specials 1024
+max_user_text 10000
+
+# Minimum size of text area
+minimum_size 1900 0
+maximum_width 300
+
+net_avg_samples 2
+no_buffers yes
+override_utf8_locale yes
+own_window yes
+own_window_colour 000000
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_type normal
+pad_percents 2
+short_units yes
+stippled_borders 3
+text_buffer_size 8000
+total_run_times 0
+update_interval 1.0
+uppercase no
+use_spacer right
+use_xft yes
+xftalpha 1
+xftfont Freesans:pixelsize=9
+
+# For transparency after 13.04
+own_window_argb_visual true
+own_window_argb_value 255
+
+TEXT
+${if_match ${battery_percent BAT1} <= 10}${image ~/Dropbox/Linux/Conky/img/conky_battery-4_white.png -p 5,22 -s 20x25}${else}${if_match ${battery_percent BAT1} <= 40}${image ~/Dropbox/Linux/Conky/img/conky_battery-3_white.png -p 5,22 -s 20x25}${else}${if_match ${battery_percent BAT1} <= 70}${image ~/Dropbox/Linux/Conky/img/conky_battery-2_white.png -p 5,22 -s 20x25}${else}${if_match ${battery_percent BAT1} <= 100}${image ~/Dropbox/Linux/Conky/img/conky_battery-1_white.png -p 5,22 -s 20x25}${endif}${endif}${endif}${endif}
+
+${offset 40}${font Segoe WP Light:pixelsize=24}Battery${font}    ${hr}
+
+${font Segoe WP Light:pixelsize=14}Time Left: ${if_empty ${battery_time BAT1}}N/A${else}${battery_time BAT1}${endif}${font}
+
+${battery_bar BAT1}
+${font Segoe WP Light:pixelsize=14}uncharged ${offset 70}${battery_percent BAT1}% ${alignr}charged${font}

@@ -1,0 +1,79 @@
+
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 1,
+    default_color = 'FFFFFF',
+    double_buffer = true,
+    draw_borders = false,
+    draw_graph_borders = true,
+    show_graph_scale = true,
+    draw_outline = false,
+    draw_shades = false,
+    gap_x = 30,
+    gap_y = 60,
+    max_user_text = 10000,
+    minimum_width = 300,
+    maximum_width = 300,
+    net_avg_samples = 2,
+    no_buffers = true,
+    override_utf8_locale = true,
+    own_window = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 255,
+    own_window_colour = '000000',
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    own_window_transparent = true,
+    own_window_type = 'normal',
+    pad_percents = 2,
+    short_units = true,
+    stippled_borders = 3,  
+    text_buffer_size = 8000,
+    total_run_times = 0,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'right',
+    use_xft = true,
+    xftalpha = 1
+};
+
+conky.text = [[
+${font Segoe WP Light:pixelsize=12}${alignr}${exec cat /etc/os-release | egrep ^NAME= | cut -d'"' -f2} ${exec cat /etc/os-release | egrep ^VERSION_ID= | cut -d'"' -f2}
+${alignr}(${exec cat /etc/os-release | egrep ^VERSION= | cut -d'(' -f2 | cut -d')' -f1})${font}
+${alignc}${font Segoe WP Light:pixelsize=44}${time %H:%M:%S}${font}
+${alignc}${font Segoe WP Light:pixelsize=22}${time %A %d of %B}${font}
+
+${font Segoe WP Light:pixelsize=16}TIME  ${font}${hr}${font Segoe WP Light:pixelsize=14}${color cccccc}
+${goto 15}Singapore ${alignr}${tztime Asia/Singapore %H:%M:%S}
+${goto 15}Moscow ${alignr}${tztime Europe/Moscow %H:%M:%S}
+${goto 15}Athens ${alignr}${tztime Europe/Athens %H:%M:%S}
+${goto 15}UTC ${alignr}${tztime Etc/UTC %H:%M:%S}
+${goto 15}Pacific Time ${alignr}${tztime US/Pacific %H:%M:%S}${color}${font}
+
+# CPU section
+${font Segoe WP Light:pixelsize=16}CPU  ${font}${hr}${font Segoe WP Light:pixelsize=14}${color cccccc}
+${goto 15}${cpu cpu0}%${goto 55}${cpubar cpu0 5}
+${goto 15}${if_existing /sys/devices/system/cpu/cpu0}cpu1: ${cpu cpu1}%${endif}${if_existing /sys/devices/system/cpu/cpu1}${goto 90}cpu2: ${cpu cpu2}%${endif}${if_existing /sys/devices/system/cpu/cpu2}${goto 165}cpu3: ${cpu cpu3}%${endif}${if_existing /sys/devices/system/cpu/cpu3}${goto 240}cpu4: ${cpu cpu4}%${endif}
+${goto 15}${if_existing /sys/devices/system/cpu/cpu4}cpu5: ${cpu cpu4}%${endif}${if_existing /sys/devices/system/cpu/cpu5}${goto 90}cpu6: ${cpu cpu5}%${endif}${if_existing /sys/devices/system/cpu/cpu6}${goto 165}cpu7: ${cpu cpu6}%${endif}${if_existing /sys/devices/system/cpu/cpu7}${goto 240}cpu8: ${cpu cpu7}%${endif}
+${goto 15}${stippled_hr}
+${goto 15}1. ${top name 1}${goto 220}${top pid 1}${alignr}${top cpu 1}%
+${goto 15}2. ${top name 2}${goto 220}${top pid 2}${alignr}${top cpu 2}%
+${goto 15}3. ${top name 3}${goto 220}${top pid 3}${alignr}${top cpu 3}%${color}${font}
+
+# RAM section
+${font Segoe WP Light:pixelsize=16}RAM  ${font}${hr}${font Segoe WP Light:pixelsize=14}${color cccccc}
+${goto 15}${memperc}%${goto 55}${membar 5,205}${alignr}${memmax}
+${goto 15}${stippled_hr}
+${goto 15}1. ${top_mem name 1}${goto 220}${top_mem pid 1}${alignr}${top_mem mem 1}%
+${goto 15}2. ${top_mem name 2}${goto 220}${top_mem pid 2}${alignr}${top_mem mem 2}%
+${goto 15}3. ${top_mem name 3}${goto 220}${top_mem pid 3}${alignr}${top_mem mem 3}%${color}${font}
+
+# DISK section
+${font Segoe WP Light:pixelsize=16}DISK & NETWORK  ${font}${hr}${font Segoe WP Light:pixelsize=14}${color cccccc}
+${goto 15}root
+${goto 15}${fs_used_perc}%${goto 55}${fs_bar 5,205}${alignr}${fs_size}
+###DISK_LOOP_SECTION###${goto 15}${stippled_hr}
+${if_existing /proc/net/route ###LINK###}${font Segoe WP Light:pixelsize=12}${goto 15}↓  ${downspeedf ###LINK###}KiB ${alignr}${upspeedf ###LINK###}KiB  ↑${font}
+${goto 15}${downspeedgraph ###LINK### 36,144 ffffff ffffff 1000}${alignr}${upspeedgraph ###LINK### 36,144 fffffff ffffff 100}
+${endif}${color}${font}
+]];
