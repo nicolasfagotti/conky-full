@@ -74,6 +74,6 @@ ${goto 15}root
 ${goto 15}${fs_used_perc}%${goto 55}${fs_bar 5,205}${alignr}${fs_size}
 ###DISK_LOOP_SECTION###${goto 15}${stippled_hr}
 ${if_existing /proc/net/route ###LINK###}${font Segoe WP Light:pixelsize=12}${goto 15}↓  ${downspeedf ###LINK###}KiB ${alignr}${upspeedf ###LINK###}KiB  ↑${font}
-${goto 15}${downspeedgraph ###LINK### 36,144 ffffff ffffff 1000}${alignr}${upspeedgraph ###LINK### 36,144 fffffff ffffff 100}
+${goto 15}${downspeedgraph ###LINK### 36,142 ffffff ffffff 1000}${alignr}${upspeedgraph ###LINK### 36,142 fffffff ffffff 100}
 ${endif}${color}${font}
 ]];
